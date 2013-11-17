@@ -6,7 +6,9 @@
   "author": "Tom Moor <tom.moor@gmail.com> (http://tommoor.com)",
   "main": "app.js",
   "dependencies": {
+    "pg": "*",
     "express": "3.x",
+    "express3-handlebars": "*",
     "handlebars": "*",
     "cron": "1.*",
     "underscore": "*"

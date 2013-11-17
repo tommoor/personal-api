@@ -1,0 +1,22 @@
+<h1>API Setup</h1>
+
+<p>Awesome, you got this far. Here's a list of plugins you have installed, to install more simply install the NPM package.</p>
+
+<h2>Installed Plugins</h2>
+
+<div class="plugins">
+{{#each plugins}}
+  <form action="/setup" method="POST">
+      <h3>{{plugin.name}}</h3>
+      <input type="hidden" name="plugin" value="{{id}}" />
+      
+      {{#each plugin.config}}
+          <label for="{{name}}">{{label}}</label>
+          <input type="text" name="{{name}}" />
+          <p class="description">{{description}}</p>
+      {{/each}}
+      
+      <input type="submit" value="Save" />
+  </form>
+{{/each}}
+</div>

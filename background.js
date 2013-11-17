@@ -1,26 +1,10 @@
 var _ = require('underscore');
+var plugins = require('./plugins.js');
 
-var getInstalledPlugins = function(cb) {
-    require('child_process').exec('npm ls -g --json', function(err, stdout, stderr) {
-        if (err) return cb(err);
-        var packages = JSON.parse(stdout);
-        var filtered = [];
-        
-        // filter out npm modules to those that begin with personal-api
-        for(key in packages['dependencies']) {
-            if (key.match(/^personal\-api/)) {
-                filtered.push(key);
-            }
-        }
-        
-        cb(null, filtered);
-    });
-};
-    
 module.exports = {
     fetchAll: function() {
         
-        getInstalledPlugins(function(err, plugins){
+        plugins.getInstalled(function(err, plugins){
             _.each(plugins, function(plugin){
                 module.exports.fetch(plugin);
             });
@@ -32,13 +16,13 @@ module.exports = {
         try {
             var service = require(plugin);
         } catch(e) {
-            console.log(plugin + ' appears to be malformed', e);
+            console.log('Could not load plugin ' + plugin, e);
         }
         
         try {
             service.fetch(module.exports.save);
         } catch(e) {
-            console.log(plugin + ' error fetching data', e);
+            console.log('Error fetching data from plugin', e);
         }
     },
     
