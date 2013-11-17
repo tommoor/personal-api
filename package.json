@@ -2,9 +2,13 @@
   "name": "personal-api",
   "description": "Local aggregation, storage and display of personal data",
   "version": "0.0.1",
-  "private": true,
+  "license": "MIT",
+  "author": "Tom Moor <tom.moor@gmail.com> (http://tommoor.com)",
+  "main": "app.js",
   "dependencies": {
     "express": "3.x",
-    "handlebars": "*"
+    "handlebars": "*",
+    "cron": "1.*",
+    "underscore": "*"
   }
 }
