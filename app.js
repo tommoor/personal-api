@@ -6,7 +6,7 @@ var plugins = require('./plugins.js');
 var app = express();
 var cronJob = require('cron').CronJob;
 var background = require('./background');
-var port = 5000;
+var port = 4000;
 
 // background data fetching
 //var job = new cronJob('* * * * * *', background.fetchAll, null, true);
@@ -42,12 +42,12 @@ app.post('/install', function(req, res){
     
     client.connect(function(err) {
       if (err) {
-        return console.error('could not connect to postgres', err);
+         return console.error('could not connect to postgres', err);
       }
       
       // write our db config file
-      fs.write('config.js', JSON.stringify(req.body), function(err, success){
-          
+      fs.writeFile('config.js', 'module.exports='+JSON.stringify(req.body), function(err, written){
+          console.log('config written');
       });
     });
     
